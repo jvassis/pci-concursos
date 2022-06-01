@@ -18,4 +18,4 @@ res = sapply(urls_regioes, \(url) {
     html_attr('href')
 })
 
-saveRDS(res, 'lista-urls-concursos.rds')
+saveRDS(res, file.path('results', 'lista-urls-concursos.rds'))
