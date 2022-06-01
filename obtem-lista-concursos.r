@@ -1,9 +1,7 @@
-# configuracoes ================================================================
 rm(list = ls())
 
 if (!require(rvest)) install.packages(rvest)
 library(rvest)
-#===============================================================================
 
 url = 'https://www.pciconcursos.com.br/concursos/nacional/'
 urls_regioes = url %>%
