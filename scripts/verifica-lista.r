@@ -1,7 +1,7 @@
 rm(list = ls())
 library(rvest)
 
-urls_concursos = readRDS('lista-urls-concursos.rds')
+urls_concursos = readRDS(file.path('results', 'lista-urls-concursos.rds'))
 
 res = lapply(urls_concursos, \(urls_regiao) {
   lapply(urls_regiao, \(url) {
@@ -22,8 +22,8 @@ res = lapply(urls_concursos, \(urls_regiao) {
             grepl('abertura|retificacao', .)]
       }) %>%
       html_attr('href')
-    return(list(verifica = verifica, urls_pdfs = urls_pdfs))
+    return(list(url = url, verifica = verifica, urls_pdfs = urls_pdfs))
   })
 })
 
-saveRDS(res, 'lista-verificacao-urls.rds')
+saveRDS(res, file.path('results', 'lista-verificacao-urls.rds'))
