@@ -7,6 +7,7 @@ rm(list = ls())
 ## estatistico e obtencao dos pdfs
 # source(file.path('scripts', 'verifica-lista.r'))
 
+
 urls_concursos = readRDS(file.path('results', 'lista-verificacao-urls.rds'))
 
 res = lapply(urls_concursos, \(concursos_regiao) {

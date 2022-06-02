@@ -1,10 +1,16 @@
 rm(list = ls())
 library(rvest)
+source(file.path('scripts', 'auxiliares.r'))
 
 urls_concursos = readRDS(file.path('results', 'lista-urls-concursos.rds'))
 
+n = length(unlist(urls_concursos))
+i = 1
+
 res = lapply(urls_concursos, \(urls_regiao) {
   lapply(urls_regiao, \(url) {
+    printStatus(url, i / n)
+    i <<- i + 1
     page = read_html(url)
     verifica = page %>%
       html_text() %>%
@@ -22,7 +28,11 @@ res = lapply(urls_concursos, \(urls_regiao) {
             grepl('abertura|retificacao', .)]
       }) %>%
       html_attr('href')
-    return(list(url = url, verifica = verifica, urls_pdfs = urls_pdfs))
+    return(list(
+      url = url,
+      verifica = verifica,
+      urls_pdfs = urls_pdfs
+    ))
   })
 })
 
